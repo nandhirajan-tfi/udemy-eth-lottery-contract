@@ -38,3 +38,5 @@
 - Sending Ether to a winner
 - Function Modifiers
 
+### Ganache:
+- To work with local networks. Remix IDE automatically generates the local network
