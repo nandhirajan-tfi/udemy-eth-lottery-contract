@@ -60,4 +60,45 @@ describe("Lottery Contract", () => {
         assert.equal(accounts[1], players[1]);
         assert.equal(accounts[2], players[2]);
     });
+
+    it("Requires a minimum amount of ether to enter", async () => {
+        try {
+            await lottery.methods.enter().send({
+                from: accounts[0],
+                value: 0
+            });
+
+            assert(false);
+        }
+        catch (err) {
+            assert(err);
+        }
+    });
+
+    it("Only manager can call pickWinner", async () => {
+        try {
+            await lottery.methods.pickWinner().send({
+                from: accounts[1],
+            });
+            assert(false);
+        }
+        catch (err) {
+            assert(err);
+        }
+    });
+
+    it("Send money to the players and reset the players entry", async () => {
+        await lottery.methods.enter().send({
+            from: accounts[0],
+            value: web3.utils.toWei("0.2", "ether")
+        });
+
+        const initialBalance = await web3.eth.getBalance(accounts[0]); // Amount of ETH in Wei that gives the account. 
+        await lottery.methods.pickWinner().send({ from: accounts[0] });
+        const finalBalance = await web3.eth.getBalance(accounts[0]);
+        const difference = finalBalance - initialBalance;
+        console.log("Initial Balance ", initialBalance);
+        console.log("Final Balance ", finalBalance);
+        console.log("Difference ", difference);
+    })
 })
