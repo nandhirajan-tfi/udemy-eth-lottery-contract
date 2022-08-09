@@ -27,7 +27,7 @@
 ### Open Issues
 - Not able to push code to GitHub using SSH Protocol
 
-### Steps:
+### Tutorials:
 - Lottery Contract
 - Lottery Design
 - Solidity Types
@@ -40,3 +40,10 @@
 
 ### Ganache:
 - To work with local networks. Remix IDE automatically generates the local network
+
+### Steps:
+
+- Write the contract - Solidity Program
+- Compile the contract to generate ABI Interface and Bytecode
+- Deploy the contract using ABI Interface and Bytecode
+- Write the testcase to interact with contract
